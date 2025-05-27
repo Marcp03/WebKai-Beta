@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 const authenticateToken = require('../middleware/auth');
-&nbsp;
-&nbsp;
+;
+;
 
 // GET all data with optional filters as query params
 router.get('/', async (req, res) => {
@@ -47,21 +47,21 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 });
-&nbsp;
-&nbsp;
+;
+;
 
 // POST create or update data (protected)
 router.post('/', authenticateToken, async (req, res) => {
   try {
     const { pillar, year, population, violenceType, region, age, value } = req.body;
-&nbsp;
-&nbsp;
+;
+;
 
     if (!pillar || !year || !population || !violenceType || !region || !age || value == null) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
-&nbsp;
-&nbsp;
+;
+;
 
     // Check existing record
     const checkQuery = `
@@ -69,8 +69,8 @@ router.post('/', authenticateToken, async (req, res) => {
       pillar=$1 AND year=$2 AND population=$3 AND violence_type=$4 AND region=$5 AND age=$6
     `;
     const { rows } = await db.query(checkQuery, [pillar, year, population, violenceType, region, age]);
-&nbsp;
-&nbsp;
+;
+;
 
     if (rows.length > 0) {
       // Update existing
@@ -88,15 +88,15 @@ router.post('/', authenticateToken, async (req, res) => {
       await db.query(insertQuery, [pillar, year, population, violenceType, region, age, value]);
       res.status(201).json({ message: 'Dato creado correctamente' });
     }
-&nbsp;
-&nbsp;
+;
+;
 
   } catch (err) {
     console.error('Error saving data', err);
     res.status(500).json({ message: 'Error interno del servidor' });
   }
 });
-&nbsp;
-&nbsp;
+;
+;
 
 module.exports = router;
