@@ -10,7 +10,10 @@ const app = express();
 ;
 ;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://webkai-2.onrender.com',
+  credentials: true
+}));
 app.use(express.json());
 ;
 ;
