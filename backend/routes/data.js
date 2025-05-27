@@ -37,8 +37,8 @@ router.get('/', async (req, res) => {
       query += ` AND age = $${params.length}`;
     }
     query += ' ORDER BY year DESC';
-&nbsp;
-&nbsp;
+;
+;
 
     const { rows } = await db.query(query, params);
     res.json(rows);
