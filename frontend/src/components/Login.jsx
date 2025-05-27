@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-&nbsp;
-&nbsp;
+
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/auth/login';
-&nbsp;
-&nbsp;
+
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-&nbsp;
-&nbsp;
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,8 +25,7 @@ function Login({ onLogin }) {
       setError(err.response?.data?.message || 'Error en inicio de sesión');
     }
   }
-&nbsp;
-&nbsp;
+
 
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
@@ -70,7 +66,6 @@ function Login({ onLogin }) {
     </form>
   );
 }
-&nbsp;
-&nbsp;
+
 
 export default Login;
