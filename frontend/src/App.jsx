@@ -3,14 +3,10 @@ import Dashboard from './components/Dashboard';
 import AdminPanel from './components/AdminPanel';
 import Login from './components/Login';
 import axios from 'axios';
-&nbsp;
-&nbsp;
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-&nbsp;
-&nbsp;
 
   // Setup axios defaults
   useEffect(() => {
@@ -20,24 +16,21 @@ function App() {
       delete axios.defaults.headers.common['Authorization'];
     }
   }, [token]);
-&nbsp;
-&nbsp;
+
 
   const handleLogin = (newToken) => {
     setToken(newToken);
     localStorage.setItem('token', newToken);
     setIsLoggedIn(true);
   };
-&nbsp;
-&nbsp;
+
 
   const handleLogout = () => {
     setToken('');
     localStorage.removeItem('token');
     setIsLoggedIn(false);
   };
-&nbsp;
-&nbsp;
+
 
   return (
     <div className="min-h-screen bg-neutralLight text-neutralDark font-sans">
@@ -63,8 +56,7 @@ function App() {
           </button>
         </div>
       </header>
-&nbsp;
-&nbsp;
+
 
       <main className="max-w-6xl mx-auto px-4 py-8 space-y-16" aria-live="polite">
         <section id="inicio" tabIndex="-1" aria-label="Inicio">
@@ -73,8 +65,7 @@ function App() {
             Bienvenidos a la plataforma digital del <strong>Observatorio KAI+</strong>, un espacio de análisis y visibilización de la violencia, desapariciones, y asistencia humanitaria.
           </p>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="sobre" tabIndex="-1" aria-label="Sobre el Observatorio">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4">Sobre el Observatorio</h2>
@@ -82,8 +73,7 @@ function App() {
             El Observatorio KAI+ es una iniciativa comprometida con la recolección, análisis y difusión rigurosa y transparente de datos relacionados con violencia y situaciones vulnerables.
           </p>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="metodologia" tabIndex="-1" aria-label="Metodología y fuentes">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4">Metodología y fuentes</h2>
@@ -94,8 +84,7 @@ function App() {
             <li>Aplicación de protocolos internacionales para el trabajo con información sensible.</li>
           </ul>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="pilares" tabIndex="-1" aria-label="Cuatro pilares">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-8 text-center">Cuatro pilares del Observatorio</h2>
@@ -104,22 +93,19 @@ function App() {
               <h3 className="text-xl font-semibold text-primary mb-2">Muertes violentas</h3>
               <p id="desc-muertes">Registro y análisis de muertes causadas por violencia para visibilizar su impacto social.</p>
             </article>
-&nbsp;
-&nbsp;
+
 
             <article className="bg-white rounded-lg shadow-md p-6 focus:ring-accent5 focus:ring-4 focus:outline-none" tabIndex="0" aria-describedby="desc-violencia">
               <h3 className="text-xl font-semibold text-primary mb-2">Violencia generalizada</h3>
               <p id="desc-violencia">Estudio de diversas formas de violencia que afectan a la población facilitando la comprensión contextual.</p>
             </article>
-&nbsp;
-&nbsp;
+
 
             <article className="bg-white rounded-lg shadow-md p-6 focus:ring-accent5 focus:ring-4 focus:outline-none" tabIndex="0" aria-describedby="desc-desaparecidos">
               <h3 className="text-xl font-semibold text-primary mb-2">Personas desaparecidas</h3>
               <p id="desc-desaparecidos">Documentación y monitoreo de casos de personas desaparecidas para promover búsqueda y justicia.</p>
             </article>
-&nbsp;
-&nbsp;
+
 
             <article className="bg-white rounded-lg shadow-md p-6 focus:ring-accent5 focus:ring-4 focus:outline-none" tabIndex="0" aria-describedby="desc-refugiados">
               <h3 className="text-xl font-semibold text-primary mb-2">Asistencia a personas refugiadas</h3>
@@ -127,15 +113,13 @@ function App() {
             </article>
           </div>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="estadisticas" tabIndex="-1" aria-label="Estadísticas y visualizaciones">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4 text-center">Estadísticas y visualizaciones</h2>
           <Dashboard />
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="publicaciones" tabIndex="-1" aria-label="Publicaciones">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4">Publicaciones</h2>
@@ -145,8 +129,7 @@ function App() {
             <li><a href="#" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline focus:outline-accent5">Reporte especial - Personas desaparecidas</a></li>
           </ul>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="contacto" tabIndex="-1" aria-label="Contacto y denuncias">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4">Contacto y denuncias</h2>
@@ -175,8 +158,7 @@ function App() {
             >Enviar</button>
           </form>
         </section>
-&nbsp;
-&nbsp;
+
 
         <section id="area-privada" tabIndex="-1" aria-label="Área privada de carga de datos">
           <h2 className="text-3xl font-bold text-primary border-b-4 border-accent3 pb-1 mb-4">Área privada de carga de datos</h2>
@@ -187,8 +169,7 @@ function App() {
           )}
         </section>
       </main>
-&nbsp;
-&nbsp;
+
 
       <footer className="bg-neutralDark text-neutralLight text-center py-4 select-none">
         Observatorio KAI+ &bull; Fuente pública, seria y verificable &bull; &copy; 2024
@@ -196,7 +177,6 @@ function App() {
     </div>
   );
 }
-&nbsp;
-&nbsp;
+
 
 export default App;
