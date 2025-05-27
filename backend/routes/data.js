@@ -3,80 +3,76 @@ const router = express.Router();
 const db = require('../db');
 const authenticateToken = require('../middleware/auth');
 
-// GET all data with optional filters as query params
+// GET /api/data?pillar=&year=&region=&age_range=&...
 router.get('/', async (req, res) => {
   try {
     const {
-      pillar, year, population_type, violence_type, region, municipality,
-      age_range, month, death_location, weapon_type, judicial_status,
-      migration_country, migration_reason
+      pillar,
+      year,
+      population_type,
+      region,
+      municipality,
+      age_range,
+      violence_type,
+      month
     } = req.query;
 
-    let query = 'SELECT * FROM observatory_data WHERE 1=1';
-    const params = [];
+    const filters = [];
+    const values = [];
 
     if (pillar) {
-      params.push(pillar);
-      query += ` AND pillar = $${params.length}`;
+      filters.push(`pillar = $${filters.length + 1}`);
+      values.push(pillar);
     }
+
     if (year) {
-      params.push(Number(year));
-      query += ` AND year = $${params.length}`;
+      filters.push(`year = $${filters.length + 1}`);
+      values.push(year);
     }
+
     if (population_type) {
-      params.push(population_type);
-      query += ` AND population_type = $${params.length}`;
+      filters.push(`population_type ILIKE $${filters.length + 1}`);
+      values.push(`%${population_type}%`);
     }
-    if (violence_type) {
-      params.push(violence_type);
-      query += ` AND violence_type = $${params.length}`;
-    }
+
     if (region) {
-      params.push(region);
-      query += ` AND region = $${params.length}`;
+      filters.push(`region ILIKE $${filters.length + 1}`);
+      values.push(`%${region}%`);
     }
+
     if (municipality) {
-      params.push(municipality);
-      query += ` AND municipality = $${params.length}`;
+      filters.push(`municipality ILIKE $${filters.length + 1}`);
+      values.push(`%${municipality}%`);
     }
+
     if (age_range) {
-      params.push(age_range);
-      query += ` AND age_range = $${params.length}`;
+      filters.push(`age_range = $${filters.length + 1}`);
+      values.push(age_range);
     }
+
+    if (violence_type) {
+      filters.push(`violence_type ILIKE $${filters.length + 1}`);
+      values.push(`%${violence_type}%`);
+    }
+
     if (month) {
-      params.push(month);
-      query += ` AND month = $${params.length}`;
-    }
-    if (death_location) {
-      params.push(death_location);
-      query += ` AND death_location = $${params.length}`;
-    }
-    if (weapon_type) {
-      params.push(weapon_type);
-      query += ` AND weapon_type = $${params.length}`;
-    }
-    if (judicial_status) {
-      params.push(judicial_status);
-      query += ` AND judicial_status = $${params.length}`;
-    }
-    if (migration_country) {
-      params.push(migration_country);
-      query += ` AND migration_country = $${params.length}`;
-    }
-    if (migration_reason) {
-      params.push(migration_reason);
-      query += ` AND migration_reason = $${params.length}`;
+      filters.push(`month ILIKE $${filters.length + 1}`);
+      values.push(`%${month}%`);
     }
 
-    query += ' ORDER BY year DESC';
+    const whereClause = filters.length > 0 ? `WHERE ${filters.join(' AND ')}` : '';
+    const result = await pool.query(
+      `SELECT * FROM observatory_data ${whereClause} ORDER BY year DESC, created_at DESC`,
+      values
+    );
 
-    const { rows } = await db.query(query, params);
-    res.json(rows);
-  } catch (err) {
-    console.error('Error querying data', err);
-    res.status(500).json({ message: 'Error interno del servidor' });
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener datos filtrados:', error);
+    res.status(500).json({ error: 'Error al obtener datos' });
   }
 });
+
 
 // POST create new data (protected)
 router.post('/', authenticateToken, async (req, res) => {
