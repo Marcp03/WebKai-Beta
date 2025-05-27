@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-&nbsp;
-&nbsp;
+
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/data';
-&nbsp;
-&nbsp;
+
 
 const pillars = [
   { value: 'muertes', label: 'Muertes violentas' },
@@ -13,8 +11,7 @@ const pillars = [
   { value: 'desaparecidos', label: 'Personas desaparecidas' },
   { value: 'refugiados', label: 'Asistencia a personas refugiadas' },
 ];
-&nbsp;
-&nbsp;
+
 
 const populations = [
   { value: 'general', label: 'General' },
@@ -23,8 +20,7 @@ const populations = [
   { value: 'niños', label: 'Niños y Niñas' },
   { value: 'adultos-mayores', label: 'Adultos mayores' },
 ];
-&nbsp;
-&nbsp;
+
 
 const violenceTypes = [
   { value: 'física', label: 'Violencia física' },
@@ -32,8 +28,7 @@ const violenceTypes = [
   { value: 'sexual', label: 'Violencia sexual' },
   { value: 'económica', label: 'Violencia económica' },
 ];
-&nbsp;
-&nbsp;
+
 
 const regions = [
   { value: 'norte', label: 'Norte' },
@@ -42,8 +37,7 @@ const regions = [
   { value: 'oriente', label: 'Oriente' },
   { value: 'occidente', label: 'Occidente' },
 ];
-&nbsp;
-&nbsp;
+
 
 const ages = [
   { value: '0-12', label: '0-12' },
@@ -52,8 +46,7 @@ const ages = [
   { value: '36-60', label: '36-60' },
   { value: '60+', label: '60+' },
 ];
-&nbsp;
-&nbsp;
+
 
 function AdminPanel({ onLogout }) {
   const [formData, setFormData] = useState({
@@ -67,26 +60,22 @@ function AdminPanel({ onLogout }) {
   });
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-&nbsp;
-&nbsp;
+
 
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   }
-&nbsp;
-&nbsp;
+
 
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage('');
     setError('');
-&nbsp;
-&nbsp;
+
 
     const { pillar, year, population, violenceType, region, age, value } = formData;
-&nbsp;
-&nbsp;
+
 
     // Validate inputs
     if (
@@ -99,8 +88,7 @@ function AdminPanel({ onLogout }) {
       setError('El valor debe ser un número mayor o igual a 0.');
       return;
     }
-&nbsp;
-&nbsp;
+
 
     try {
       const res = await axios.post(API_URL, {
@@ -121,8 +109,7 @@ function AdminPanel({ onLogout }) {
       setError(err.response?.data?.message || 'Error guardando datos');
     }
   }
-&nbsp;
-&nbsp;
+
 
   return (
     <div className="max-w-lg mx-auto bg-white rounded-lg shadow-md p-6 space-y-6">
@@ -143,8 +130,7 @@ function AdminPanel({ onLogout }) {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="year" className="block font-semibold mb-1">Año</label>
@@ -160,8 +146,7 @@ function AdminPanel({ onLogout }) {
             className="w-full border border-neutralDark rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent5"
           />
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="population" className="block font-semibold mb-1">Población</label>
@@ -179,8 +164,7 @@ function AdminPanel({ onLogout }) {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="violenceType" className="block font-semibold mb-1">Tipo de violencia</label>
@@ -198,8 +182,7 @@ function AdminPanel({ onLogout }) {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="region" className="block font-semibold mb-1">Región</label>
@@ -217,8 +200,7 @@ function AdminPanel({ onLogout }) {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="age" className="block font-semibold mb-1">Edad</label>
@@ -236,8 +218,7 @@ function AdminPanel({ onLogout }) {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div className="mb-4">
           <label htmlFor="value" className="block font-semibold mb-1">Valor</label>
@@ -252,13 +233,11 @@ function AdminPanel({ onLogout }) {
             className="w-full border border-neutralDark rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent5"
           />
         </div>
-&nbsp;
-&nbsp;
+
 
         {message && <p className="text-green-700 font-semibold mb-4">{message}</p>}
         {error && <p className="text-red-700 font-semibold mb-4">{error}</p>}
-&nbsp;
-&nbsp;
+
 
         <button
           type="submit"
@@ -267,8 +246,7 @@ function AdminPanel({ onLogout }) {
           Guardar dato
         </button>
       </form>
-&nbsp;
-&nbsp;
+
 
       <button
         onClick={onLogout}
@@ -279,7 +257,6 @@ function AdminPanel({ onLogout }) {
     </div>
   );
 }
-&nbsp;
-&nbsp;
+
 
 export default AdminPanel;
