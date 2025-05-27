@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid } from 'recharts';
-&nbsp;
-&nbsp;
+
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/data';
-&nbsp;
-&nbsp;
+
 
 const pillars = [
   { value: 'muertes', label: 'Muertes violentas' },
@@ -14,8 +12,7 @@ const pillars = [
   { value: 'desaparecidos', label: 'Personas desaparecidas' },
   { value: 'refugiados', label: 'Asistencia a personas refugiadas' },
 ];
-&nbsp;
-&nbsp;
+
 
 const populations = [
   { value: '', label: 'Todas' },
@@ -25,8 +22,7 @@ const populations = [
   { value: 'niños', label: 'Niños y Niñas' },
   { value: 'adultos-mayores', label: 'Adultos mayores' },
 ];
-&nbsp;
-&nbsp;
+
 
 const violenceTypes = [
   { value: '', label: 'Todas' },
@@ -35,8 +31,7 @@ const violenceTypes = [
   { value: 'sexual', label: 'Violencia sexual' },
   { value: 'económica', label: 'Violencia económica' },
 ];
-&nbsp;
-&nbsp;
+
 
 const regions = [
   { value: '', label: 'Todas' },
@@ -46,8 +41,7 @@ const regions = [
   { value: 'oriente', label: 'Oriente' },
   { value: 'occidente', label: 'Occidente' },
 ];
-&nbsp;
-&nbsp;
+
 
 const ages = [
   { value: '', label: 'Todas' },
@@ -57,8 +51,7 @@ const ages = [
   { value: '36-60', label: '36-60' },
   { value: '60+', label: '60+' },
 ];
-&nbsp;
-&nbsp;
+
 
 function Dashboard() {
   const [filters, setFilters] = useState({
@@ -72,8 +65,7 @@ function Dashboard() {
   const [years, setYears] = useState([]);
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(false);
-&nbsp;
-&nbsp;
+
 
   // Fetch available years for selected pillar to fill year options
   useEffect(() => {
@@ -86,8 +78,7 @@ function Dashboard() {
           new Set(res.data.map(item => item.year))
         ).sort((a, b) => a - b);
         setYears(uniqueYears);
-&nbsp;
-&nbsp;
+
 
         // If current selected year not in list, reset
         if (!uniqueYears.includes(Number(filters.year))) {
@@ -99,13 +90,11 @@ function Dashboard() {
         setLoading(false);
       }
     }
-&nbsp;
-&nbsp;
+
 
     fetchYears();
   }, [filters.pillar]);
-&nbsp;
-&nbsp;
+
 
   // Fetch filtered data and prepare for chart
   useEffect(() => {
@@ -136,8 +125,7 @@ function Dashboard() {
     }
     fetchData();
   }, [filters]);
-&nbsp;
-&nbsp;
+
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -146,8 +134,7 @@ function Dashboard() {
       [name]: value
     }));
   }
-&nbsp;
-&nbsp;
+
 
   return (
     <div>
@@ -164,8 +151,7 @@ function Dashboard() {
             {pillars.map(p => (<option key={p.value} value={p.value}>{p.label}</option>))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div>
           <label htmlFor="year" className="block font-semibold mb-1">Año:</label>
@@ -184,8 +170,7 @@ function Dashboard() {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div>
           <label htmlFor="population" className="block font-semibold mb-1">Población:</label>
@@ -201,8 +186,7 @@ function Dashboard() {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div>
           <label htmlFor="violenceType" className="block font-semibold mb-1">Tipo Violencia:</label>
@@ -218,8 +202,7 @@ function Dashboard() {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div>
           <label htmlFor="region" className="block font-semibold mb-1">Región:</label>
@@ -235,8 +218,7 @@ function Dashboard() {
             ))}
           </select>
         </div>
-&nbsp;
-&nbsp;
+
 
         <div>
           <label htmlFor="age" className="block font-semibold mb-1">Edad:</label>
@@ -253,8 +235,7 @@ function Dashboard() {
           </select>
         </div>
       </form>
-&nbsp;
-&nbsp;
+
 
       <div className="w-full h-96">
         {loading ? (
@@ -277,7 +258,6 @@ function Dashboard() {
     </div>
   );
 }
-&nbsp;
-&nbsp;
+
 
 export default Dashboard;
