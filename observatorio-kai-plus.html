@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Observatorio KAI+ | Plataforma Digital</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  :root {
+    --primary-color: #005792;
+    --secondary-color: #0a84ff;
+    --accent-color: #ffc300;
+    --light-bg: #f4f7fa;
+    --dark-bg: #002a4a;
+    --text-color: #222;
+    --text-light: #f9f9f9;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+  }
+
+  header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.25);
+  }
+
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem 3rem;
+  }
+
+  section.pillar-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  article.pillar {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: box-shadow var(--transition-speed);
+  }
+
+  article.pillar:hover {
+    box-shadow: 0 6px 16px rgb(0 0 0 / 0.2);
+  }
+
+  article.pillar h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
+  }
+
+  article.pillar p {
+    flex-grow: 1;
+    line-height: 1.4;
+    font-size: 1rem;
+  }
+
+  section.visualization {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    margin-bottom: 3rem;
+  }
+
+  section.visualization h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 350px;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .filters label {
+    font-weight: 600;
+    margin-right: 0.3rem;
+  }
+
+  select, input[type="number"], input[type="text"] {
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    min-width: 110px;
+  }
+
+  button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+
+  button:hover {
+    background-color: var(--primary-color);
+  }
+
+  button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+
+  .admin-panel {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    max-width: 650px;
+    margin: 0 auto 4rem;
+  }
+
+  .admin-panel h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .admin-login {
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .admin-login input[type="password"] {
+    flex-grow: 1;
+  }
+
+  .admin-login button {
+    padding: 0.5rem 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  .message {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  footer {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .filters {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    article.pillar {
+      padding: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Observatorio KAI+</h1>
+</header>
+
+<main>
+
+<section class="pillar-overview" aria-label="Los cuatro pilares del Observatorio KAI+">
+  <article class="pillar" id="pillar-muertes">
+    <h2>Muertes violentas</h2>
+    <p>Registro y análisis de muertes causadas por violencia, con énfasis en patrones y tendencias para visibilizar su impacto social.</p>
+  </article>
+  <article class="pillar" id="pillar-violencia">
+    <h2>Violencia generalizada</h2>
+    <p>Estudio de formas diversas de violencia que afectan a la población en general, facilitando la comprensión del contexto social y político.</p>
+  </article>
+  <article class="pillar" id="pillar-desaparecidos">
+    <h2>Personas desaparecidas</h2>
+    <p>Documentación y monitoreo de casos de personas desaparecidas para promover la búsqueda y la justicia.</p>
+  </article>
+  <article class="pillar" id="pillar-refugiados">
+    <h2>Asistencia a personas refugiadas</h2>
+    <p>Seguimiento a la atención y apoyo brindado a personas refugiadas y migrantes en situación de vulnerabilidad.</p>
+  </article>
+</section>
+
+<section class="visualization" aria-label="Visualización interactiva de estadísticas">
+  <h2>Visualización de estadísticas</h2>
+  <div class="filters">
+    <label for="pillar-select">Pilar:</label>
+    <select id="pillar-select" aria-controls="chart-canvas">
+      <option value="muertes">Muertes violentas</option>
+      <option value="violencia">Violencia generalizada</option>
+      <option value="desaparecidos">Personas desaparecidas</option>
+      <option value="refugiados">Asistencia a personas refugiadas</option>
+    </select>
+
+    <label for="year-select">Año:</label>
+    <select id="year-select" aria-controls="chart-canvas">
+      <!-- Years populated dynamically -->
+    </select>
+  </div>
+  <div class="chart-container">
+    <canvas id="chart-canvas" role="img" aria-label="Gráfico de estadísticas"></canvas>
+  </div>
+</section>
+
+<section class="admin-panel" aria-label="Panel de administración" id="admin-panel" hidden>
+  <h2>Panel de Administración</h2>
+  <div class="message" id="admin-message"></div>
+  
+  <form id="data-entry-form">
+    <div class="form-group">
+      <label for="data-year">Año</label>
+      <input type="number" id="data-year" name="data-year" min="2000" max="2100" required />
+    </div>
+    <div class="form-group">
+      <label for="data-pillar">Pilar</label>
+      <select id="data-pillar" name="data-pillar" required>
+        <option value="" disabled selected>Seleccione un pilar</option>
+        <option value="muertes">Muertes violentas</option>
+        <option value="violencia">Violencia generalizada</option>
+        <option value="desaparecidos">Personas desaparecidas</option>
+        <option value="refugiados">Asistencia a personas refugiadas</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="data-value">Valor</label>
+      <input type="number" id="data-value" name="data-value" min="0" required />
+    </div>
+    <button type="submit">Guardar dato</button>
+  </form>
+  <button id="logout-btn" style="margin-top:1rem; background-color:#d32f2f;">Cerrar sesión</button>
+</section>
+
+<section class="admin-login" aria-label="Ingreso administración">
+  <input type="password" id="admin-password" placeholder="Clave administrativa" aria-label="Clave administrativa" />
+  <button id="login-btn">Ingresar</button>
+</section>
+
+</main>
+
+<footer>
+  Observatorio KAI+ &bull; Fuente pública, seria y verificable &bull; &copy; 2024
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Data model: Stored in localStorage as JSON object with shape:
+  // { muertes: { year: value, ... }, violencia: {}, desaparecidos: {}, refugiados: {} }
+
+  const STORAGE_KEY = 'observatorio-kai-plus-data';
+  const ADMIN_PASSWORD = 'kaiadmin2024';
+
+  // DOM references
+  const pillarSelect = document.getElementById('pillar-select');
+  const yearSelect = document.getElementById('year-select');
+  const chartCanvas = document.getElementById('chart-canvas');
+  const adminPanel = document.getElementById('admin-panel');
+  const adminLoginSection = document.querySelector('.admin-login');
+  const adminPasswordInput = document.getElementById('admin-password');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const adminMessage = document.getElementById('admin-message');
+  const dataEntryForm = document.getElementById('data-entry-form');
+
+  let chartInstance = null;
+
+  function loadData() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      // Initialize empty data structure with some default dummy values for demonstration
+      const initialData = {
+        muertes: {
+          2019: 500,
+          2020: 480,
+          2021: 460,
+          2022: 530,
+          2023: 510
+        },
+        violencia: {
+          2019: 1200,
+          2020: 1250,
+          2021: 1100,
+          2022: 1180,
+          2023: 1130
+        },
+        desaparecidos: {
+          2019: 200,
+          2020: 215,
+          2021: 180,
+          2022: 170,
+          2023: 160
+        },
+        refugiados: {
+          2019: 350,
+          2020: 400,
+          2021: 420,
+          2022: 410,
+          2023: 450
+        }
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+      return initialData;
+    } 
+    return JSON.parse(raw);
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function getYearsForPillar(data, pillar) {
+    return Object.keys(data[pillar] || {}).sort();
+  }
+
+  function populateYearSelect(years) {
+    yearSelect.innerHTML = '';
+    years.forEach(year => {
+      const opt = document.createElement('option');
+      opt.value = year;
+      opt.textContent = year;
+      yearSelect.appendChild(opt);
+    });
+  }
+
+  function renderChart(data, pillar, year) {
+    // If year is selected, show single bar for that year
+    // If no year selected (shouldn't happen), show all years line chart
+
+    let labels = [];
+    let values = [];
+
+    if (year) {
+      labels.push(year);
+      values.push(data[pillar][year] || 0);
+    } else {
+      labels = getYearsForPillar(data, pillar);
+      values = labels.map(y => data[pillar][y] || 0);
+    }
+
+    const ctx = chartCanvas.getContext('2d');
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: pillarLabel(pillar),
+          backgroundColor: 'rgba(10, 132, 255, 0.7)',
+          borderColor: 'rgba(10, 132, 255, 1)',
+          borderWidth: 1,
+          data: values
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 600
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: Math.max(1, Math.floor(Math.max(...values)/5))
+            },
+            title: {
+              display: true,
+              text: 'Cantidad'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Año'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 14,
+                weight: '600'
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'nearest',
+            intersect: false
+          }
+        }
+      }
+    });
+  }
+
+  // Returns human-readable pillar label
+  function pillarLabel(pillar) {
+    switch(pillar) {
+      case 'muertes': return 'Muertes violentas';
+      case 'violencia': return 'Violencia generalizada';
+      case 'desaparecidos': return 'Personas desaparecidas';
+      case 'refugiados': return 'Asistencia a personas refugiadas';
+      default: return pillar;
+    }
+  }
+
+  // Populate year select options based on current pillar
+  function updateYearOptions() {
+    const data = loadData();
+    const pillar = pillarSelect.value;
+    const years = getYearsForPillar(data, pillar);
+    populateYearSelect(years);
+  }
+
+  // Event basis for updating chart based on pillar and year
+  function updateChart() {
+    const data = loadData();
+    const pillar = pillarSelect.value;
+    const year = yearSelect.value || null;
+    renderChart(data, pillar, year);
+  }
+
+  // Admin panel login
+  function onLogin() {
+    const password = adminPasswordInput.value;
+    if (password === ADMIN_PASSWORD) {
+      adminLoginSection.hidden = true;
+      adminPanel.hidden = false;
+      adminPasswordInput.value = '';
+      adminMessage.textContent = '';
+      populateDataEntryFormDefaults();
+    } else {
+      adminMessage.textContent = 'Clave incorrecta. Intente nuevamente.';
+      adminMessage.style.color = 'red';
+    }
+  }
+
+  // Logout from admin panel
+  function onLogout() {
+    adminPanel.hidden = true;
+    adminLoginSection.hidden = false;
+    adminMessage.textContent = '';
+  }
+
+  // After login, set some defaults to data entry form
+  function populateDataEntryFormDefaults() {
+    const currentYear = new Date().getFullYear();
+    document.getElementById('data-year').value = currentYear;
+    document.getElementById('data-pillar').selectedIndex = 0;
+    document.getElementById('data-value').value = '';
+  }
+
+  // Add or update data from admin form
+  function onDataEntrySubmit(event) {
+    event.preventDefault();
+    const year = document.getElementById('data-year').value.trim();
+    const pillar = document.getElementById('data-pillar').value;
+    const value = document.getElementById('data-value').value.trim();
+
+    if (!year || !pillar || !value || isNaN(value) || value < 0) {
+      adminMessage.textContent = 'Por favor, ingrese datos válidos.';
+      adminMessage.style.color = 'red';
+      return;
+    }
+
+    const data = loadData();
+
+    if (!data[pillar]) data[pillar] = {};
+    data[pillar][year] = Number(value);
+
+    saveData(data);
+    adminMessage.textContent = 'Dato guardado correctamente.';
+    adminMessage.style.color = 'green';
+
+    updateYearOptions();
+    updateChart();
+
+    populateDataEntryFormDefaults();
+  }
+
+  // Initialize page controls
+  function init() {
+    updateYearOptions();
+    updateChart();
+
+    pillarSelect.addEventListener('change', () => {
+      updateYearOptions();
+      updateChart();
+    });
+
+    yearSelect.addEventListener('change', updateChart);
+
+    loginBtn.addEventListener('click', onLogin);
+    logoutBtn.addEventListener('click', onLogout);
+    dataEntryForm.addEventListener('submit', onDataEntrySubmit);
+
+    // Accessibility: allow pressing Enter in admin password input to trigger login
+    adminPasswordInput.addEventListener('keyup', (event) => {
+      if(event.key === 'Enter') onLogin();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
+

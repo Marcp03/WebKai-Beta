@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Observatorio KAI+ | Plataforma Digital</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+  :root {
+    --neutral-dark: #222222;
+    --neutral-medium: #555555;
+    --neutral-light: #f7f7f7;
+    --neutral-lighter: #fafafa;
+    --neutral-border: #cccccc;
+    --primary-color: #004972; /* dark blue */
+    --accent-rainbow-1: #E40303; /* red */
+    --accent-rainbow-2: #FF8C00; /* orange */
+    --accent-rainbow-3: #FFED00; /* yellow */
+    --accent-rainbow-4: #008026; /* green */
+    --accent-rainbow-5: #004DFF; /* blue */
+    --accent-rainbow-6: #750787; /* purple */
+    --focus-outline: 3px solid var(--accent-rainbow-5);
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+    --font-family: 'Montserrat', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--neutral-lighter);
+    color: var(--neutral-dark);
+    line-height: 1.5;
+  }
+
+  header {
+    background-color: var(--primary-color);
+    color: var(--neutral-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    user-select: none;
+  }
+
+  header .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: var(--neutral-light);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed);
+  }
+
+  nav a:hover,
+  nav a:focus {
+    background-color: var(--accent-rainbow-5);
+    outline: none;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  section h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid var(--accent-rainbow-3);
+    padding-bottom: 0.3rem;
+  }
+
+  /* Inicio */
+  #inicio p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--neutral-medium);
+  }
+
+  /* Sobre el Observatorio */
+  #sobre p {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+
+  /* Metodología y fuentes */
+  #metodologia ul {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding-left: 1.3rem;
+  }
+
+  /* Cuatro pilares */
+  #cuatro-pilares {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  article.pilar {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: box-shadow var(--transition-speed);
+  }
+
+  article.pilar:hover,
+  article.pilar:focus-within {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  article.pilar h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 1.3rem;
+    margin-bottom: 0.7rem;
+  }
+
+  article.pilar p {
+    flex-grow: 1;
+    font-size: 1rem;
+  }
+
+  /* Estadísticas y visualizaciones */
+  section#estadisticas {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .filters {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .filters label {
+    font-weight: 600;
+  }
+
+  .filters select,
+  .filters input[type="number"],
+  .filters input[type="text"] {
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--neutral-border);
+    font-size: 1rem;
+    min-width: 120px;
+    background: white;
+    color: var(--neutral-dark);
+  }
+
+  .filters select:focus,
+  .filters input:focus {
+    outline: none;
+    border-color: var(--accent-rainbow-5);
+    box-shadow: 0 0 5px var(--accent-rainbow-5);
+  }
+
+  button {
+    background-color: var(--primary-color);
+    color: var(--neutral-light);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+
+  button:hover,
+  button:focus {
+    background-color: var(--accent-rainbow-5);
+    outline: none;
+  }
+
+  button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 380px;
+    margin-bottom: 1rem;
+  }
+
+  /* Publicaciones */
+  #publicaciones ul {
+    max-width: 850px;
+    margin: 0 auto;
+    font-size: 1rem;
+    padding-left: 1.3rem;
+  }
+
+  #publicaciones li + li {
+    margin-top: 0.5rem;
+  }
+
+  #publicaciones a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  #publicaciones a:hover,
+  #publicaciones a:focus {
+    text-decoration: underline;
+    outline: none;
+  }
+
+  /* Contacto y denuncias */
+  #contacto form {
+    max-width: 480px;
+    margin: 0 auto;
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  #contacto form .form-group {
+    margin-bottom: 1rem;
+  }
+
+  #contacto form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  #contacto form input,
+  #contacto form textarea {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--neutral-border);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    resize: vertical;
+    color: var(--neutral-dark);
+  }
+
+  #contacto form textarea {
+    min-height: 100px;
+  }
+
+  #contacto form input:focus,
+  #contacto form textarea:focus {
+    outline: none;
+    border-color: var(--accent-rainbow-5);
+    box-shadow: 0 0 5px var(--accent-rainbow-5);
+  }
+
+  #contacto form button {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  /* Área privada */
+  #area-privada {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 650px;
+    margin: 0 auto 4rem;
+  }
+
+  #area-privada h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .admin-login {
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .admin-login input[type="password"] {
+    flex-grow: 1;
+    border: 1px solid var(--neutral-border);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    color: var(--neutral-dark);
+  }
+
+  .admin-login input[type="password"]:focus {
+    outline: none;
+    border-color: var(--accent-rainbow-5);
+    box-shadow: 0 0 5px var(--accent-rainbow-5);
+  }
+
+  .admin-login button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: var(--neutral-light);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+  }
+
+  .admin-login button:hover,
+  .admin-login button:focus {
+    background-color: var(--accent-rainbow-5);
+    outline: none;
+  }
+
+  .message {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  /* Accessibility focus style */
+  a:focus,
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  summary:focus {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    nav {
+      justify-content: center;
+    }
+    .filters {
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: stretch;
+    }
+    .filters label {
+      margin-right: 0;
+    }
+    article.pilar {
+      padding: 1rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container" role="banner">
+    <h1 tabindex="0">Observatorio KAI+</h1>
+    <nav aria-label="Menú principal de navegación">
+      <a href="#inicio">Inicio</a>
+      <a href="#sobre">Sobre el Observatorio</a>
+      <a href="#metodologia">Metodología y fuentes</a>
+      <a href="#cuatro-pilares">Cuatro pilares</a>
+      <a href="#estadisticas">Estadísticas y visualizaciones</a>
+      <a href="#publicaciones">Publicaciones</a>
+      <a href="#contacto">Contacto y denuncias</a>
+      <a href="#area-privada">Área privada</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section id="inicio" tabindex="-1" aria-label="Inicio">
+  <h2>Inicio</h2>
+  <p>Bienvenidos a la plataforma digital del <strong>Observatorio KAI+</strong>, un espacio de análisis y visibilización de la violencia, desapariciones, y asistencia humanitaria.</p>
+</section>
+
+<section id="sobre" tabindex="-1" aria-label="Sobre el Observatorio">
+  <h2>Sobre el Observatorio</h2>
+  <p>El Observatorio KAI+ es una iniciativa comprometida con la recolección, análisis y difusión rigurosa y transparente de datos relacionados con violencia y situaciones vulnerables.</p>
+</section>
+
+<section id="metodologia" tabindex="-1" aria-label="Metodología y fuentes">
+  <h2>Metodología y fuentes</h2>
+  <ul>
+    <li>Datos obtenidos de fuentes oficiales y organizaciones aliadas.</li>
+    <li>Análisis realizado por expertos en derechos humanos y estadística.</li>
+    <li>Revisión constante de la calidad y veracidad de la información.</li>
+    <li>Aplicación de protocolos internacionales para el trabajo con información sensible.</li>
+  </ul>
+</section>
+
+<section id="cuatro-pilares" tabindex="-1" aria-label="Cuatro pilares">
+  <h2>Cuatro pilares del Observatorio</h2>
+  <article class="pilar" tabindex="0" aria-describedby="desc-muertes" id="pillar-muertes">
+    <h3>Muertes violentas</h3>
+    <p id="desc-muertes">Registro y análisis de muertes causadas por violencia para visibilizar su impacto social.</p>
+  </article>
+  <article class="pilar" tabindex="0" aria-describedby="desc-violencia" id="pillar-violencia">
+    <h3>Violencia generalizada</h3>
+    <p id="desc-violencia">Estudio de diversas formas de violencia que afectan a la población facilitando la comprensión contextual.</p>
+  </article>
+  <article class="pilar" tabindex="0" aria-describedby="desc-desaparecidos" id="pillar-desaparecidos">
+    <h3>Personas desaparecidas</h3>
+    <p id="desc-desaparecidos">Documentación y monitoreo de casos de personas desaparecidas para promover búsqueda y justicia.</p>
+  </article>
+  <article class="pilar" tabindex="0" aria-describedby="desc-refugiados" id="pillar-refugiados">
+    <h3>Asistencia a personas refugiadas</h3>
+    <p id="desc-refugiados">Seguimiento a la atención y apoyo brindado a personas refugiadas y migrantes en situación de vulnerabilidad.</p>
+  </article>
+</section>
+
+<section id="estadisticas" tabindex="-1" aria-label="Estadísticas y visualizaciones">
+  <h2>Estadísticas y visualizaciones</h2>
+  <form class="filters" aria-label="Filtros para estadísticas" role="region" aria-live="polite">
+    <div>
+      <label for="pillar-select">Pilar:</label><br/>
+      <select id="pillar-select" aria-describedby="pillar-help" required>
+        <option value="muertes">Muertes violentas</option>
+        <option value="violencia">Violencia generalizada</option>
+        <option value="desaparecidos">Personas desaparecidas</option>
+        <option value="refugiados">Asistencia a personas refugiadas</option>
+      </select>
+      <span id="pillar-help" class="sr-only">Seleccione un pilar para ver estadísticas.</span>
+    </div>
+
+    <div>
+      <label for="year-select">Año:</label><br/>
+      <select id="year-select" aria-describedby="year-help" required>
+        <!-- Options populated dynamically -->
+      </select>
+      <span id="year-help" class="sr-only">Seleccione un año para filtrar.</span>
+    </div>
+
+    <div>
+      <label for="population-select">Población:</label><br/>
+      <select id="population-select" aria-describedby="population-help" >
+        <option value="">Todas</option>
+        <option value="general">General</option>
+        <option value="mujeres">Mujeres</option>
+        <option value="personas-lgbti">Personas LGBTI+</option>
+        <option value="niños">Niños y Niñas</option>
+        <option value="adultos-mayores">Adultos mayores</option>
+      </select>
+      <span id="population-help" class="sr-only">Seleccione un grupo poblacional para filtrar.</span>
+    </div>
+
+    <div>
+      <label for="violence-type-select">Tipo de violencia:</label><br/>
+      <select id="violence-type-select" aria-describedby="violence-type-help" >
+        <option value="">Todas</option>
+        <option value="física">Violencia física</option>
+        <option value="psicológica">Violencia psicológica</option>
+        <option value="sexual">Violencia sexual</option>
+        <option value="económica">Violencia económica</option>
+      </select>
+      <span id="violence-type-help" class="sr-only">Seleccione un tipo de violencia para filtrar.</span>
+    </div>
+
+    <div>
+      <label for="region-select">Región:</label><br/>
+      <select id="region-select" aria-describedby="region-help" >
+        <option value="">Todas</option>
+        <option value="norte">Norte</option>
+        <option value="centro">Centro</option>
+        <option value="sur">Sur</option>
+        <option value="oriente">Oriente</option>
+        <option value="occidente">Occidente</option>
+      </select>
+      <span id="region-help" class="sr-only">Seleccione una región para filtrar.</span>
+    </div>
+
+    <div>
+      <label for="age-select">Edad:</label><br/>
+      <select id="age-select" aria-describedby="age-help" >
+        <option value="">Todas</option>
+        <option value="0-12">0-12</option>
+        <option value="13-17">13-17</option>
+        <option value="18-35">18-35</option>
+        <option value="36-60">36-60</option>
+        <option value="60+">60+</option>
+      </select>
+      <span id="age-help" class="sr-only">Seleccione rango de edad para filtrar.</span>
+    </div>
+  </form>
+
+  <div class="chart-container">
+    <canvas id="chart-canvas" role="img" aria-label="Gráfico de estadísticas"></canvas>
+  </div>
+</section>
+
+<section id="publicaciones" tabindex="-1" aria-label="Publicaciones">
+  <h2>Publicaciones</h2>
+  <ul>
+    <li><a href="#" target="_blank" rel="noopener noreferrer">Boletín de abril 2024</a></li>
+    <li><a href="#" target="_blank" rel="noopener noreferrer">Informe anual 2023 - Violencia Generalizada</a></li>
+    <li><a href="#" target="_blank" rel="noopener noreferrer">Reporte especial - Personas desaparecidas</a></li>
+  </ul>
+</section>
+
+<section id="contacto" tabindex="-1" aria-label="Contacto y denuncias">
+  <h2>Contacto y denuncias</h2>
+  <form id="contact-form" aria-describedby="contact-desc" novalidate>
+    <p id="contact-desc">Puede enviar denuncias o consultas usando este formulario. Respetamos su privacidad y seguridad.</p>
+    <div class="form-group">
+      <label for="contact-name">Nombre</label>
+      <input type="text" id="contact-name" name="contact-name" autocomplete="name" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="contact-email">Correo electrónico</label>
+      <input type="email" id="contact-email" name="contact-email" autocomplete="email" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="contact-message">Mensaje / Denuncia</label>
+      <textarea id="contact-message" name="contact-message" required aria-required="true"></textarea>
+    </div>
+    <button type="submit">Enviar</button>
+    <p role="alert" aria-live="assertive" id="contact-status" style="margin-top:0.5rem;"></p>
+  </form>
+</section>
+
+<section id="area-privada" tabindex="-1" aria-label="Área privada de carga de datos">
+  <h2>Área privada de carga de datos</h2>
+  <div class="admin-login" aria-label="Ingreso administrativo">
+    <input type="password" id="admin-password" placeholder="Clave administrativa" aria-label="Clave administrativa" autocomplete="current-password" />
+    <button id="login-btn" type="button">Ingresar</button>
+  </div>
+  <div id="admin-panel" hidden>
+    <div class="message" id="admin-message" role="alert" aria-live="polite"></div>
+    <form id="data-entry-form">
+      <div class="form-group">
+        <label for="data-year">Año</label>
+        <input type="number" id="data-year" name="data-year" min="2000" max="2100" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="data-pillar">Pilar</label>
+        <select id="data-pillar" name="data-pillar" required aria-required="true">
+          <option value="" disabled selected>Seleccione un pilar</option>
+          <option value="muertes">Muertes violentas</option>
+          <option value="violencia">Violencia generalizada</option>
+          <option value="desaparecidos">Personas desaparecidas</option>
+          <option value="refugiados">Asistencia a personas refugiadas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="data-population">Población</label>
+        <select id="data-population" name="data-population" required aria-required="true">
+          <option value="" disabled selected>Seleccione población</option>
+          <option value="general">General</option>
+          <option value="mujeres">Mujeres</option>
+          <option value="personas-lgbti">Personas LGBTI+</option>
+          <option value="niños">Niños y Niñas</option>
+          <option value="adultos-mayores">Adultos mayores</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="data-violence-type">Tipo de violencia</label>
+        <select id="data-violence-type" name="data-violence-type" required aria-required="true">
+          <option value="" disabled selected>Seleccione tipo de violencia</option>
+          <option value="física">Violencia física</option>
+          <option value="psicológica">Violencia psicológica</option>
+          <option value="sexual">Violencia sexual</option>
+          <option value="económica">Violencia económica</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="data-region">Región</label>
+        <select id="data-region" name="data-region" required aria-required="true">
+          <option value="" disabled selected>Seleccione región</option>
+          <option value="norte">Norte</option>
+          <option value="centro">Centro</option>
+          <option value="sur">Sur</option>
+          <option value="oriente">Oriente</option>
+          <option value="occidente">Occidente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="data-age">Edad</label>
+        <select id="data-age" name="data-age" required aria-required="true">
+          <option value="" disabled selected>Seleccione rango de edad</option>
+          <option value="0-12">0-12</option>
+          <option value="13-17">13-17</option>
+          <option value="18-35">18-35</option>
+          <option value="36-60">36-60</option>
+          <option value="60+">60+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="data-value">Valor</label>
+        <input type="number" id="data-value" name="data-value" min="0" required aria-required="true" />
+      </div>
+      <button type="submit">Guardar dato</button>
+    </form>
+    <button id="logout-btn" type="button" style="margin-top:1rem; background-color:#d32f2f; color:white; border:none; padding:0.6rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer;">Cerrar sesión</button>
+  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo" style="background-color:#222; color:#eee; text-align:center; padding:1rem 2rem; user-select:none;">
+  Observatorio KAI+ &bull; Fuente pública, seria y verificable &bull; &copy; 2024
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Storage key
+  const STORAGE_KEY = 'observatorio-kai-plus-data-v2-extended';
+  const ADMIN_PASSWORD = 'kaiadmin2024';
+
+  // DOM elements
+  const pillarSelect = document.getElementById('pillar-select');
+  const yearSelect = document.getElementById('year-select');
+  const populationSelect = document.getElementById('population-select');
+  const violenceTypeSelect = document.getElementById('violence-type-select');
+  const regionSelect = document.getElementById('region-select');
+  const ageSelect = document.getElementById('age-select');
+  const chartCanvas = document.getElementById('chart-canvas');
+  const adminPanel = document.getElementById('admin-panel');
+  const adminLoginSection = document.querySelector('.admin-login');
+  const adminPasswordInput = document.getElementById('admin-password');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const adminMessage = document.getElementById('admin-message');
+  const dataEntryForm = document.getElementById('data-entry-form');
+  const contactForm = document.getElementById('contact-form');
+  const contactStatus = document.getElementById('contact-status');
+
+  let chartInstance = null;
+
+  // Data Structure:
+  // Stored as an array of entries, each entry is an object:
+  // {
+  //   pillar: string,
+  //   year: number,
+  //   population: string,
+  //   violenceType: string,
+  //   region: string,
+  //   age: string,
+  //   value: number
+  // }
+  
+  // Load data or initialize with dummy data
+  function loadData() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      const initialData = [
+        { pillar: 'muertes', year: 2023, population: 'general', violenceType: 'física', region: 'centro', age: '18-35', value: 120 },
+        { pillar: 'muertes', year: 2023, population: 'mujeres', violenceType: 'psicológica', region: 'norte', age: '36-60', value: 35 },
+        { pillar: 'violencia', year: 2023, population: 'personas-lgbti', violenceType: 'sexual', region: 'sur', age: '18-35', value: 50 },
+        { pillar: 'desaparecidos', year: 2022, population: 'general', violenceType: 'física', region: 'oriente', age: '13-17', value: 80 },
+        { pillar: 'refugiados', year: 2023, population: 'general', violenceType: 'económica', region: 'occidente', age: '60+', value: 70 },
+        // Add more initial dummy entries as needed
+      ];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+      return initialData;
+    }
+    else {
+      try {
+        return JSON.parse(raw);
+      } catch (e) {
+        console.error('Error parsing stored data', e);
+        return [];
+      }
+    }
+  }
+
+  function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  // Returns sorted unique years matching pillar
+  function getYearsForPillar(data, pillar) {
+    const filtered = data.filter(d => d.pillar === pillar);
+    const years = [...new Set(filtered.map(d => d.year))];
+    return years.sort((a,b) => a - b);
+  }
+
+  // Populate year select with options
+  function populateYearSelect(years) {
+    yearSelect.innerHTML = '';
+    years.forEach(year => {
+      const opt = document.createElement('option');
+      opt.value = year;
+      opt.textContent = year;
+      yearSelect.appendChild(opt);
+    });
+  }
+
+  // Filter data matching all current filters
+  function filterData(data) {
+    const pillar = pillarSelect.value;
+    const year = Number(yearSelect.value);
+    const population = populationSelect.value;
+    const violenceType = violenceTypeSelect.value;
+    const region = regionSelect.value;
+    const age = ageSelect.value;
+
+    return data.filter(d =>
+      d.pillar === pillar &&
+      d.year === year &&
+      (population === '' || d.population === population) &&
+      (violenceType === '' || d.violenceType === violenceType) &&
+      (region === '' || d.region === region) &&
+      (age === '' || d.age === age)
+    );
+  }
+
+  // Aggregate filtered data by summing values
+  function aggregateData(filtered) {
+    // In this simplistic example, sum all matching values
+    return filtered.reduce((total, entry) => total + entry.value, 0);
+  }
+
+  // For timeline chart, returns aggregate per year for the pillar and filters except year
+  function aggregateDataByYear(data, pillar, population, violenceType, region, age) {
+    const filtered = data.filter(d =>
+      d.pillar === pillar &&
+      (population === '' || d.population === population) &&
+      (violenceType === '' || d.violenceType === violenceType) &&
+      (region === '' || d.region === region) &&
+      (age === '' || d.age === age)
+    );
+    const yearMap = {};
+    filtered.forEach(d => {
+      yearMap[d.year] = (yearMap[d.year] || 0) + d.value;
+    });
+    // Return objects sorted by year ascending
+    return Object.entries(yearMap).sort((a,b) => a[0]-b[0]);
+  }
+
+  // Render chart according to selected filters
+  function renderChart() {
+    const data = loadData();
+    const pillar = pillarSelect.value;
+    const year = Number(yearSelect.value);
+    const population = populationSelect.value;
+    const violenceType = violenceTypeSelect.value;
+    const region = regionSelect.value;
+    const age = ageSelect.value;
+
+    const ctx = chartCanvas.getContext('2d');
+
+    if (chartInstance) {
+      chartInstance.destroy();
+    }
+
+    // Show timeline chart if year is empty or show single year aggregate
+    // But in this design year is required; let's implement a timeline chart below the filters showing last 5 years totals
+
+    // Aggregate current filters for selected year
+    const filtered = filterData(data);
+    const totalValue = aggregateData(filtered);
+
+    // Also prepare timeline (past 5 years) data for pillar with other filters but no year filter
+    const currentYear = new Date().getFullYear();
+    const timelineYears = [];
+    for (let yr = currentYear-4; yr <= currentYear; yr++) {
+      timelineYears.push(yr);
+    }
+
+    const timelineData = timelineYears.map(yr => {
+      const filteredYears = data.filter(d =>
+        d.pillar === pillar &&
+        d.year === yr &&
+        (population === '' || d.population === population) &&
+        (violenceType === '' || d.violenceType === violenceType) &&
+        (region === '' || d.region === region) &&
+        (age === '' || d.age === age)
+      );
+      return filteredYears.reduce((sum, v) => sum + v.value, 0);
+    });
+
+    chartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: timelineYears,
+        datasets: [{
+          label: `${pillarLabel(pillar)} (${populationLabel(population)}, ${violenceTypeLabel(violenceType)}, Reg: ${regionLabel(region)}, Edad: ${ageLabel(age)})`,
+          data: timelineData,
+          backgroundColor: 'rgba(0,73,114,0.7)',
+          borderColor: 'rgba(0,73,114,1)',
+          borderWidth: 1,
+          borderRadius: 4,
+          hoverBackgroundColor: 'rgba(0,141,255,0.85)',
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: { duration: 700 },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Cantidad' },
+            ticks: { stepSize: Math.max(1, Math.floor(Math.max(...timelineData)/5)) }
+          },
+          x: {
+            title: { display: true, text: 'Año' }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: { font: { size: 14, weight: '600' } }
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'nearest',
+            intersect: false,
+            callbacks: {
+              label: ctx => ctx.parsed.y.toLocaleString()
+            }
+          },
+          title: {
+            display: true,
+            text: `Total para el año ${year}: ${totalValue.toLocaleString()}`
+          }
+        }
+      }
+    });
+  }
+
+  // Human readable labels for dropdown values
+  function pillarLabel(val) {
+    switch(val) {
+      case 'muertes': return 'Muertes violentas';
+      case 'violencia': return 'Violencia generalizada';
+      case 'desaparecidos': return 'Personas desaparecidas';
+      case 'refugiados': return 'Asistencia a personas refugiadas';
+      default: return val || 'N/A';
+    }
+  }
+
+  function populationLabel(val) {
+    switch(val) {
+      case 'general': return 'General';
+      case 'mujeres': return 'Mujeres';
+      case 'personas-lgbti': return 'Personas LGBTI+';
+      case 'niños': return 'Niños y Niñas';
+      case 'adultos-mayores': return 'Adultos mayores';
+      case '': return 'Todas las poblaciones';
+      default: return val;
+    }
+  }
+
+  function violenceTypeLabel(val) {
+    switch(val) {
+      case 'física': return 'Violencia física';
+      case 'psicológica': return 'Violencia psicológica';
+      case 'sexual': return 'Violencia sexual';
+      case 'económica': return 'Violencia económica';
+      case '': return 'Todas las violencias';
+      default: return val;
+    }
+  }
+
+  function regionLabel(val) {
+    switch(val) {
+      case 'norte': return 'Norte';
+      case 'centro': return 'Centro';
+      case 'sur': return 'Sur';
+      case 'oriente': return 'Oriente';
+      case 'occidente': return 'Occidente';
+      case '': return 'Todas las regiones';
+      default: return val;
+    }
+  }
+
+  function ageLabel(val) {
+    switch(val) {
+      case '0-12': return '0-12 años';
+      case '13-17': return '13-17 años';
+      case '18-35': return '18-35 años';
+      case '36-60': return '36-60 años';
+      case '60+': return '60+ años';
+      case '': return 'Todas las edades';
+      default: return val;
+    }
+  }
+
+  // Populate year options base on selected pillar
+  function updateYearOptions() {
+    const data = loadData();
+    const pillar = pillarSelect.value;
+    const years = getYearsForPillar(data, pillar);
+    if(years.length === 0) {
+      // If no data for pillar, fill years with last 5
+      const currentYear = new Date().getFullYear();
+      const defaultYears = [];
+      for(let y=currentYear-4; y <= currentYear; y++) {
+        defaultYears.push(y);
+      }
+      populateYearSelect(defaultYears);
+    }
+    else {
+      populateYearSelect(years);
+    }
+  }
+
+  // Admin authentication logic
+  function onLogin() {
+    const password = adminPasswordInput.value.trim();
+    if (password === ADMIN_PASSWORD) {
+      adminLoginSection.hidden = true;
+      adminPanel.hidden = false;
+      adminPasswordInput.value = '';
+      adminMessage.textContent = '';
+      populateDataEntryFormDefaults();
+    } else {
+      adminMessage.textContent = 'Clave incorrecta. Intente nuevamente.';
+      adminMessage.style.color = 'red';
+      adminPasswordInput.focus();
+    }
+  }
+
+  function onLogout() {
+    adminPanel.hidden = true;
+    adminLoginSection.hidden = false;
+    adminMessage.textContent = '';
+  }
+
+  function populateDataEntryFormDefaults() {
+    const currentYear = new Date().getFullYear();
+    document.getElementById('data-year').value = currentYear;
+    document.getElementById('data-pillar').selectedIndex = 0;
+    document.getElementById('data-population').selectedIndex = 0;
+    document.getElementById('data-violence-type').selectedIndex = 0;
+    document.getElementById('data-region').selectedIndex = 0;
+    document.getElementById('data-age').selectedIndex = 0;
+    document.getElementById('data-value').value = '';
+  }
+
+  // Add or update data entry from admin form
+  function onDataEntrySubmit(e) {
+    e.preventDefault();
+
+    const year = Number(document.getElementById('data-year').value);
+    const pillar = document.getElementById('data-pillar').value;
+    const population = document.getElementById('data-population').value;
+    const violenceType = document.getElementById('data-violence-type').value;
+    const region = document.getElementById('data-region').value;
+    const age = document.getElementById('data-age').value;
+    const value = Number(document.getElementById('data-value').value);
+
+    if (
+      !year || !pillar || !population || !violenceType || !region || !age ||
+      isNaN(value) || value < 0
+    ) {
+      adminMessage.textContent = 'Por favor, ingrese todos los datos correctamente.';
+      adminMessage.style.color = 'red';
+      return;
+    }
+
+    const data = loadData();
+
+    // Check if existing entry with same keys
+    const index = data.findIndex(item =>
+      item.year === year &&
+      item.pillar === pillar &&
+      item.population === population &&
+      item.violenceType === violenceType &&
+      item.region === region &&
+      item.age === age
+    );
+
+    if (index >= 0) {
+      // Update existing value (overwrite)
+      data[index].value = value;
+    } else {
+      // Add new entry
+      data.push({ year, pillar, population, violenceType, region, age, value });
+    }
+
+    saveData(data);
+    adminMessage.textContent = 'Dato guardado correctamente.';
+    adminMessage.style.color = 'green';
+
+    updateYearOptions();
+
+    // Update filter selects if possibly affected (year usually)
+    if (pillarSelect.value === pillar) {
+      updateYearOptions();
+      yearSelect.value = year; // select newly added year if possible
+    }
+
+    renderChart();
+    populateDataEntryFormDefaults();
+  }
+
+  // Contact form submission - no backend so just simulate success with message
+  function onContactFormSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+
+    if (!name || !email || !message) {
+      contactStatus.textContent = 'Por favor, complete todos los campos obligatorios.';
+      contactStatus.style.color = 'red';
+      return;
+    }
+
+    // Normally form submission logic here - simulate success
+    contactStatus.style.color = 'green';
+    contactStatus.textContent = 'Su mensaje ha sido enviado exitosamente. Gracias por contactarnos.';
+    contactForm.reset();
+  }
+
+  // Initialize app
+  function init() {
+    updateYearOptions();
+    renderChart();
+
+    pillarSelect.addEventListener('change', () => {
+      updateYearOptions();
+      // Reset population and other filters to default on pillar change for clarity
+      populationSelect.value = '';
+      violenceTypeSelect.value = '';
+      regionSelect.value = '';
+      ageSelect.value = '';
+      renderChart();
+    });
+
+    yearSelect.addEventListener('change', renderChart);
+    populationSelect.addEventListener('change', renderChart);
+    violenceTypeSelect.addEventListener('change', renderChart);
+    regionSelect.addEventListener('change', renderChart);
+    ageSelect.addEventListener('change', renderChart);
+
+    loginBtn.addEventListener('click', onLogin);
+    logoutBtn.addEventListener('click', onLogout);
+    dataEntryForm.addEventListener('submit', onDataEntrySubmit);
+    contactForm.addEventListener('submit', onContactFormSubmit);
+
+    adminPasswordInput.addEventListener('keyup', e => {
+      if (e.key === 'Enter') onLogin();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+
+</script>
+
+<!-- Screen reader only text for better accessibility -->
+<style>
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important; 
+    height: 1px !important; 
+    padding: 0 !important; 
+    margin: -1px !important; 
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important; 
+    border: 0 !important;
+  }
+</style>
+
+</body>
+</html>
+
